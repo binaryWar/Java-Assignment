@@ -1,16 +1,23 @@
 package com.rapifuzz.assignment.dto;
 
+import com.rapifuzz.assignment.entity.UserType;
 import lombok.Getter;
 
 @Getter
 public class UserRequestDto {
     private String firstName;
+    private UserType userType;
     private String emailAddress;
     private String lastName;
     private String country;
     private String state;
     private String pincode;
     private String city;
+    private String countryCode;
+    private String mobileNo;
+    private String fax;
+    private String phone;
+    private String password;
 
     public String getFirstName() {
         return firstName;
@@ -107,10 +114,8 @@ public class UserRequestDto {
     public void setPassword(String password) {
         this.password = password;
     }
+    public UserType getUserType(){
+        return userType;
+    }
 
-    private String countryCode;
-    private String mobileNo;
-    private String fax;
-    private String phone;
-    private String password;
 }

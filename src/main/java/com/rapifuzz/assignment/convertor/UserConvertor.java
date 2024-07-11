@@ -19,6 +19,7 @@ public class UserConvertor {
         user.setPassword(userRequest.getPassword());
         user.setState(userRequest.getState());
         user.setPincode(userRequest.getPincode());
+        user.setUserType(userRequest.getUserType());
         return  user;
     }
 }

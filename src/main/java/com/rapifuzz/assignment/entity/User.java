@@ -23,6 +23,53 @@ public class User {
     @Column(name ="id")
     private Integer id;
 
+    @Column(length = 15,nullable = false)
+    private String userType;
+
+    @Column(nullable = false,length = 25)
+    private String firstName;
+
+    @Column(nullable = false,length = 25)
+    private String lastName;
+
+    @Column(nullable = false, unique = true,length = 50)
+    private String emailAddress;
+
+    @Column(nullable = false,length = 15)
+    private String country;
+
+    @Column(nullable = false,length = 15)
+    private String state;
+
+    @Column(nullable = false,length = 15)
+    private String city;
+
+    @Column(nullable = false,length = 10)
+    private String pincode;
+
+    @Column(nullable = false,length = 6)
+    private String countryCode;
+
+    @Column(nullable = false,length = 10)
+    private String mobileNo;
+
+    @Column(length = 25)
+    private String fax;
+
+    @Column(length = 25)
+    private String phone;
+
+    @Column(nullable = false,length = 25)
+    private String password;
+
+    @CreationTimestamp
+    @Column(nullable = false,updatable = false)
+    private Date createdAt;
+
+    @UpdateTimestamp
+    @Column
+    private Date updatedAt;
+
     public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
@@ -70,47 +117,7 @@ public class User {
     public void setPassword(String password) {
         this.password = password;
     }
-
-    @Column(nullable = false)
-    private String firstName;
-
-    @Column(nullable = false)
-    private String lastName;
-
-    @Column(nullable = false, unique = true)
-    private String emailAddress;
-
-    @Column(nullable = false)
-    private String country;
-
-    @Column(nullable = false)
-    private String state;
-
-    @Column(nullable = false)
-    private String city;
-
-    @Column(nullable = false)
-    private String pincode;
-
-    @Column(nullable = false)
-    private String countryCode;
-
-    @Column(nullable = false)
-    private String mobileNo;
-
-    private String fax;
-
-    private String phone;
-
-    @Column(nullable = false)
-    private String password;
-
-    @CreationTimestamp
-    @Column(nullable = false,updatable = false)
-    private Date createdAt;
-
-    @UpdateTimestamp
-    @Column
-    private Date updatedAt;
-
+    public void setUserType(UserType userType) {
+        this.userType = userType.name();
+    }
 }
