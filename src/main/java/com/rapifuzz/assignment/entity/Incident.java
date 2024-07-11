@@ -10,10 +10,10 @@ import java.util.Date;
 @Getter
 @Setter
 public class Incident {
-    @Id
-    @Column
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+//    @Id
+//    @Column
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    private Integer id;
 
     @Column(nullable=false)
     private IncidentIdentity incidentIdentity;
@@ -30,6 +30,7 @@ public class Incident {
     @Column(length = 50)
     private String description;
 
+    @Id
     @Column(nullable = false,length = 15,unique = true)
     private String incidentNumber;
 
