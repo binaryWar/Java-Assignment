@@ -35,6 +35,9 @@ public class User {
     @Column(nullable = false, unique = true,length = 50)
     private String emailAddress;
 
+    @Column(nullable = false)
+    private String address;
+
     @Column(nullable = false,length = 15)
     private String country;
 

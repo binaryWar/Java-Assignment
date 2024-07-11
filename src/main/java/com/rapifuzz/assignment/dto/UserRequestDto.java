@@ -18,6 +18,7 @@ public class UserRequestDto {
     private String fax;
     private String phone;
     private String password;
+    private String address;
 
     public String getFirstName() {
         return firstName;

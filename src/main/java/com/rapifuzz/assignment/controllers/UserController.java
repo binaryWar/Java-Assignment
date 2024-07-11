@@ -1,5 +1,6 @@
 package com.rapifuzz.assignment.controllers;
 
+import com.rapifuzz.assignment.dto.AuthenicationResponseDto;
 import com.rapifuzz.assignment.dto.UserLoginRequestDto;
 import com.rapifuzz.assignment.dto.UserRequestDto;
 import com.rapifuzz.assignment.dto.UserResponseDto;
@@ -24,14 +25,20 @@ public class UserController {
         return new ResponseEntity<>(new UserResponseDto(), HttpStatus.OK);
     }
     @PostMapping("/login")
-    ResponseEntity<?> login(@RequestBody UserLoginRequestDto userLoginRequestDto){
+    ResponseEntity<AuthenicationResponseDto> login(@RequestBody UserLoginRequestDto userLoginRequestDto){
         Optional<User> userOptional = this.userService.login(userLoginRequestDto.getEmailAddress(), userLoginRequestDto.getPassword());
+        AuthenicationResponseDto authenicationResponseDto = new AuthenicationResponseDto();
         if (userOptional.isPresent()) {
             // User authenticated successfully
-            return ResponseEntity.ok("Login successful");
+            User user = userOptional.get();
+            authenicationResponseDto.setEmailAddress(user.getEmailAddress());
+            authenicationResponseDto.setId(user.getId());
+            authenicationResponseDto.setHttpStatusCode(HttpStatus.OK);
+            return new ResponseEntity<>(authenicationResponseDto, HttpStatus.OK);
         } else {
             // Authentication failed
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid email address or password");
+            authenicationResponseDto.setHttpStatusCode(HttpStatus.UNAUTHORIZED);
+            return new ResponseEntity<>(authenicationResponseDto,HttpStatus.BAD_REQUEST);
         }
     }
 
