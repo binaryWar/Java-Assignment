@@ -35,10 +35,10 @@ public class IncidentService {
             incident.setReportedId(String.valueOf(reporter.getId()));
         }
         generator = new SimpleRandomNumberGenerator();
-        incident.setPriority(Priority.valueOf(priority));
-        incident.setStatus(IncidentStatus.valueOf(status));
+        incident.setPriority(Priority.valueOf(priority).name());
+        incident.setStatus(IncidentStatus.valueOf(status).name());
         incident.setDescription(description);
-        incident.setIncidentIdentity(IncidentIdentity.valueOf(incidentIdentity));
+        incident.setIncidentIdentity(IncidentIdentity.valueOf(incidentIdentity).name());
         incident.setIncidentNumber(generator.generateNumber());
         incident.setCreatedBy(userId);
         Incident newIncident = this.incidentRepository.save(incident);
