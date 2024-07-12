@@ -19,7 +19,7 @@ public class ReporterController {
     void create(@RequestBody String body) {
         this.reporterService.createReporter(body);
     }
-    @GetMapping("/reporters")
+    @GetMapping("/search")
     public ResponseEntity<List<Reporter>> getReportersByNamePrefix(@RequestParam String prefix) {
         try{
             List<Reporter> reporters = reporterService.findReportersByNamePrefix(prefix);
