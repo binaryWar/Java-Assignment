@@ -1,7 +1,6 @@
 package com.rapifuzz.assignment.services;
 
 import com.rapifuzz.assignment.convertor.UserConvertor;
-import com.rapifuzz.assignment.dto.UserLoginRequestDto;
 import com.rapifuzz.assignment.dto.UserRequestDto;
 import com.rapifuzz.assignment.entity.User;
 import com.rapifuzz.assignment.repositories.UserRepository;
@@ -24,12 +23,19 @@ public class UserService {
         Optional<User> userOptional = this.userRepository.findByEmailAddress(emailAddress);
         if (userOptional.isPresent()) {
             User user = userOptional.get();
-            // Check if password matches
             if (user.getPassword().equals(password)) {
                 return userOptional;
             }
         }
-
         return Optional.empty();
+    }
+    public Optional<User> resetPassword(String emailAddress,String password){
+        Optional<User> userOptional = this.userRepository.findByEmailAddress(emailAddress);
+        if(userOptional.isPresent()){
+            User user = userOptional.get();
+            user.setPassword(password);
+            this.userRepository.save(user);
+        }
+        return userOptional;
     }
 }

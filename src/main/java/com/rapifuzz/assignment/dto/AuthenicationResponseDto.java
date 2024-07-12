@@ -9,6 +9,6 @@ import org.springframework.http.HttpStatusCode;
 @Setter
 public class AuthenicationResponseDto {
     private String emailAddress;
-    private Integer id;
+    private Long id;
     private HttpStatusCode httpStatusCode;
 }

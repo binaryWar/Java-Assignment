@@ -7,4 +7,5 @@ import java.util.List;
 
 public interface ReporterRepository extends JpaRepository<Reporter,String> {
     List<Reporter> findByNameStartingWith(String prefix);
+    Reporter getReporterById(Long id);
 }

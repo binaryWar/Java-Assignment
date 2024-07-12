@@ -6,7 +6,8 @@ import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.util.Date;
-@Entity(name="incidents")
+
+@Entity
 @Getter
 @Setter
 public class Incident {
@@ -22,8 +23,9 @@ public class Incident {
     @Column(nullable=false,length = 15)
     private String incidentIdentity;
 
-    @Column(nullable=false)
-    private Long reportedId;
+    @ManyToOne
+    @JoinColumn(name = "reported_id", nullable = false)
+    private Reporter reporter;
 
     @Column(nullable=false,length = 15)
     private String priority;
@@ -39,5 +41,5 @@ public class Incident {
     private Date createdAt;
 
     @Column(nullable = false,unique = false)
-    private String createdBy;
+    private Long createdBy;
 }

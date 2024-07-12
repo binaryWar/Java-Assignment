@@ -12,4 +12,5 @@ public class IncidentEditDto {
     private String reporterName;
     private Boolean createNewReporter;
     private String incidentNumber;
+    private String reporterMobileNo;
 }

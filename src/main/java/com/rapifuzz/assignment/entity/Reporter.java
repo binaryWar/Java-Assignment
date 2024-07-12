@@ -1,5 +1,6 @@
 package com.rapifuzz.assignment.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -7,6 +8,7 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.util.Date;
+import java.util.List;
 
 @Getter
 @Setter
@@ -20,6 +22,9 @@ public class Reporter {
     @Column(nullable = false)
     private String name;
 
+    @Column(nullable = true)
+    private String mobileNo;
+
     @Column(nullable = false,updatable = false)
     @CreationTimestamp
     private Date createdAt;
@@ -27,4 +32,8 @@ public class Reporter {
     @Column
     @UpdateTimestamp
     private Date updatedAt;
+
+    @OneToMany(mappedBy = "reporter")
+    @JsonIgnore
+    private List<Incident> incidents;
 }

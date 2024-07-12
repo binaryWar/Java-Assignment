@@ -1,9 +1,6 @@
 package com.rapifuzz.assignment.controllers;
 
-import com.rapifuzz.assignment.dto.AuthenicationResponseDto;
-import com.rapifuzz.assignment.dto.UserLoginRequestDto;
-import com.rapifuzz.assignment.dto.UserRequestDto;
-import com.rapifuzz.assignment.dto.UserResponseDto;
+import com.rapifuzz.assignment.dto.*;
 import com.rapifuzz.assignment.entity.User;
 import com.rapifuzz.assignment.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,10 +39,23 @@ public class UserController {
         }
     }
 
-    @GetMapping("/register")
-    public String registerGet(){
+    @PutMapping("/forgot-password")
+    public ResponseEntity<?> forgotPassword(@RequestBody ForgotPasswordUserDto forgotPasswordUserDto) {
+        ResetPasswordResponseDto resetPasswordResponseDto = new ResetPasswordResponseDto();
+        try{
+            Optional<User> userOptional = this.userService.resetPassword(forgotPasswordUserDto.getEmailAddress(),forgotPasswordUserDto.getNewPassword());
+            if(userOptional.isPresent()){
+                resetPasswordResponseDto.setMessage("Password reset successful");
+                return new ResponseEntity<>(resetPasswordResponseDto,HttpStatus.OK);
+            }else{
+                resetPasswordResponseDto.setMessage("User not found!!!");
+                return new ResponseEntity<>(resetPasswordResponseDto,HttpStatus.NOT_FOUND);
+            }
+        }catch(Exception e){
+            return new ResponseEntity<>("Something went wrong",HttpStatus.INTERNAL_SERVER_ERROR);
+        }
 
-        return "Shashi";
     }
+
 
 }

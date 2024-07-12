@@ -13,4 +13,5 @@ public class IncidentRequestDto {
     private String incidentIdentity;
     private String reporterName;
     private Boolean createNewReporter;
+    private String reporterMobileNo;
 }

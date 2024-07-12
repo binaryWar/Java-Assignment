@@ -20,8 +20,8 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name ="id")
-    private Integer id;
+    @Column
+    private Long id;
 
     @Column(length = 15,nullable = false)
     private String userType;

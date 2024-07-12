@@ -21,7 +21,7 @@ public class IncidentController {
     public ResponseEntity<?> create(@RequestHeader("userId") String userId,
             @RequestBody IncidentRequestDto incidentRequestDto) {
         try{
-            Incident incident = this.incidentService.createIncident(incidentRequestDto.getReporterId(), incidentRequestDto.getPriority(), incidentRequestDto.getStatus(), incidentRequestDto.getDescription(), incidentRequestDto.getIncidentIdentity(), incidentRequestDto.getReporterName(), incidentRequestDto.getCreateNewReporter(),userId);
+            Incident incident = this.incidentService.createIncident(incidentRequestDto.getReporterId(), incidentRequestDto.getPriority(), incidentRequestDto.getStatus(), incidentRequestDto.getDescription(), incidentRequestDto.getIncidentIdentity(), incidentRequestDto.getReporterName(), incidentRequestDto.getCreateNewReporter(),incidentRequestDto.getReporterMobileNo(),userId);
             return ResponseEntity.status(HttpStatus.OK).body(incident);
         }catch (Exception e){
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
@@ -46,7 +46,7 @@ public class IncidentController {
                 return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
             }
             Incident updatedIncident  = this.incidentService.updateIncident(
-                    incidentRequestDto.getIncidentNumber(), incidentRequestDto.getReporterId(), incidentRequestDto.getPriority(), incidentRequestDto.getStatus(), incidentRequestDto.getDescription(), incidentRequestDto.getIncidentIdentity(), incidentRequestDto.getReporterName(),userId
+                    incidentRequestDto.getIncidentNumber(), incidentRequestDto.getReporterId(), incidentRequestDto.getPriority(), incidentRequestDto.getStatus(), incidentRequestDto.getDescription(), incidentRequestDto.getIncidentIdentity(), incidentRequestDto.getReporterName(),userId,incidentRequestDto.getReporterMobileNo()
             );
             return ResponseEntity.status(HttpStatus.OK).body(updatedIncident);
         }catch (Exception e){
