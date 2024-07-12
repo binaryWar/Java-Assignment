@@ -1,5 +1,6 @@
 package com.rapifuzz.assignment.controllers;
 
+import com.rapifuzz.assignment.dto.IncidentEditDto;
 import com.rapifuzz.assignment.dto.IncidentRequestDto;
 import com.rapifuzz.assignment.entity.Incident;
 import com.rapifuzz.assignment.services.IncidentService;
@@ -36,6 +37,20 @@ public class IncidentController {
             return new ResponseEntity<>(incidents, HttpStatus.OK);
         }catch (Exception e){
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+    }
+    @PutMapping("/update")
+    public ResponseEntity<?> updateIncident(@RequestBody IncidentEditDto incidentRequestDto, @RequestHeader("userId") String userId) {
+        try{
+            if(userId == null || userId.isEmpty()) {
+                return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            }
+            Incident updatedIncident  = this.incidentService.updateIncident(
+                    incidentRequestDto.getIncidentNumber(), incidentRequestDto.getReporterId(), incidentRequestDto.getPriority(), incidentRequestDto.getStatus(), incidentRequestDto.getDescription(), incidentRequestDto.getIncidentIdentity(), incidentRequestDto.getReporterName(),userId
+            );
+            return ResponseEntity.status(HttpStatus.OK).body(updatedIncident);
+        }catch (Exception e){
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 }

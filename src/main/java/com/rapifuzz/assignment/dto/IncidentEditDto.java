@@ -1,11 +1,9 @@
 package com.rapifuzz.assignment.dto;
 
 import lombok.Getter;
-import lombok.Setter;
 
 @Getter
-@Setter
-public class IncidentRequestDto {
+public class IncidentEditDto {
     private Long reporterId;
     private String priority;
     private String status;
@@ -13,4 +11,5 @@ public class IncidentRequestDto {
     private String incidentIdentity;
     private String reporterName;
     private Boolean createNewReporter;
+    private String incidentNumber;
 }

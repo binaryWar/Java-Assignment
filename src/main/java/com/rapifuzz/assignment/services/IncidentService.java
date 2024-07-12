@@ -18,7 +18,7 @@ public class IncidentService {
     private ReporterRepository reporterRepository;
 
     private RandoNumberGenerator generator;
-    public Incident createIncident(String reporterId,
+    public Incident createIncident(Long reporterId,
                                    String priority,
                                    String status,
                                    String description,
@@ -32,7 +32,7 @@ public class IncidentService {
             incident.setReportedId(reporterId);
         }else{
             Reporter reporter = this.createrReporter(reporterName);
-            incident.setReportedId(String.valueOf(reporter.getId()));
+            incident.setReportedId(reporter.getId());
         }
         generator = new SimpleRandomNumberGenerator();
         incident.setPriority(Priority.valueOf(priority).name());
@@ -51,5 +51,30 @@ public class IncidentService {
     }
     public List<Incident> fetchIncidentByCreatedBy(String userId) {
         return this.incidentRepository.findByCreatedBy(userId);
+    }
+
+    public Incident updateIncident( String incidentNumber,
+                                    Long reporterId,
+                                   String priority,
+                                   String status,
+                                   String description,
+                                   String incidentIdentity,
+                                   String reporterName,
+                                   String userId) {
+        Incident incident = incidentRepository.findByIncidentNumberAndCreatedBy(incidentNumber,userId);
+        if (incident == null) {
+            throw new RuntimeException("Incident not found");
+        }
+        if(reporterId != null) {
+            incident.setReportedId(reporterId);
+        }else{
+            Reporter reporter = this.createrReporter(reporterName);
+            incident.setReportedId(reporter.getId());
+        }
+        incident.setPriority(Priority.valueOf(priority).name());
+        incident.setStatus(IncidentStatus.valueOf(status).name());
+        incident.setDescription(description);
+        incident.setIncidentIdentity(IncidentIdentity.valueOf(incidentIdentity).name());
+        return incidentRepository.save(incident);
     }
 }

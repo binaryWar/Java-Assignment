@@ -22,8 +22,8 @@ public class Incident {
     @Column(nullable=false,length = 15)
     private String incidentIdentity;
 
-    @Column(nullable=false,length = 15)
-    private String reportedId;
+    @Column(nullable=false)
+    private Long reportedId;
 
     @Column(nullable=false,length = 15)
     private String priority;

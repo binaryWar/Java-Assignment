@@ -5,6 +5,8 @@ import com.rapifuzz.assignment.repositories.ReporterRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class ReporterService {
     @Autowired
@@ -15,5 +17,9 @@ public class ReporterService {
         Reporter reporter = this.reporterRepository.save(newReporter);
         newReporter.setId(reporter.getId());
         return newReporter;
+    }
+
+    public List<Reporter> findReportersByNamePrefix(String prefix) {
+        return reporterRepository.findByNameStartingWith(prefix);
     }
 }
